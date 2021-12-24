@@ -8,7 +8,7 @@ from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
 
 from message import *
-from new import *
+from image import *
 from Function import *
 
 from fsm import TocMachine
@@ -19,21 +19,46 @@ load_dotenv()
 
 
 machine = TocMachine(
-    states=["init", "state1", "state2"],
+    states=["init", "dine_input_time", "dine_breakfast", "dine_lunch", "dine_dinner",
+            "BMI_input_height", "BMI_input_weight", "BMI_input_gender", "BMI_final",
+            "water_input", "water_input_weight", "water_input_bottle_storage", "water_final",
+            "sport_input_type", "sport_input_time", "sport_final"],
     transitions=[
-        {
-            "trigger": "advance",
-            "source": "init",
-            "dest": "state1",
-            "conditions": "is_going_to_state1",
-        },
-        {
-            "trigger": "advance",
-            "source": "init",
-            "dest": "state2",
-            "conditions": "is_going_to_state2",
-        },
-        {"trigger": "go_back", "source": ["state1", "state2"], "dest": "init"},
+        # dine
+        {"trigger": "advance", "source": "init",
+            "dest": "dine_input_time", "conditions": "is_going_to_dine"},
+        {"trigger": "advance", "source": "dine_input_time",
+            "dest": "dine_breakfast", "conditions": "input breakfast"},
+        {"trigger": "advance", "source": "dine_input_time",
+            "dest": "dine_lunch", "conditions": "input_lunch"},
+        {"trigger": "advance", "source": "dine_input_time",
+            "dest": "dine_dinner", "conditions": "input_dinner"},
+        # BMI
+        {"trigger": "advance", "source": "init",
+            "dest": "BMI_input_height", "conditions": "measure BMI"},
+        {"trigger": "advance", "source": "BMI_input_height",
+            "dest": "BMI_input_weight", "conditions": "measure BMI_input_height"},
+        {"trigger": "advance", "source": "BMI_input_weight",
+            "dest": "BMI_input_gender", "conditions": "measure BMI_input_weight"},
+        {"trigger": "advance", "source": "BMI_input_gender",
+            "dest": "BMI_final", "conditions": "measure BMI_input_gender"},
+        # water
+        {"trigger": "advance", "source": "init",
+            "dest": "water_input_weight", "conditions": "drink water"},
+        {"trigger": "advance", "source": "water_input_weight",
+            "dest": "water_input_bottle_storage", "conditions": "drink water_input weight"},
+        {"trigger": "advance", "source": "water_input_bottle_storage",
+            "dest": "water_final", "conditions": "drink water_input bottlr storage"},
+        # exercise
+        {"trigger": "advance", "source": "init",
+            "dest": "sport_input_type", "conditions": "exercise"},
+        {"trigger": "advance", "source": "sport_input_type",
+            "dest": "sport_input_time", "conditions": "input exercise type"},
+        {"trigger": "advance", "source": "sport_input_time",
+            "dest": "sport_final", "conditions": "input exercise time"},
+        # go back
+        {"trigger": "go_back", "source": ["dine_breakfast", "dine_lunch",
+                                          "dine_dinner", "BMI_final", "water_final", "sport_final"], "dest": "init"},
     ],
     initial="init",
     auto_transitions=False,
@@ -76,10 +101,10 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     msg = event.message.text
-    if '最新合作廠商' in msg:
+    if '吃什麼' in msg:
         message = imagemap_message()
         line_bot_api.reply_message(event.reply_token, message)
-    elif '最新活動訊息' in msg:
+    elif '健康' in msg:
         message = buttons_message()
         line_bot_api.reply_message(event.reply_token, message)
     elif '註冊會員' in msg:
@@ -88,8 +113,8 @@ def handle_message(event):
     elif '旋轉木馬' in msg:
         message = Carousel_Template()
         line_bot_api.reply_message(event.reply_token, message)
-    elif '圖片畫廊' in msg:
-        message = test()
+    elif '抽' in msg:
+        message = random_image()
         line_bot_api.reply_message(event.reply_token, message)
     elif '功能列表' in msg:
         message = function_list()
@@ -115,36 +140,6 @@ def welcome(event):
     name = profile.display_name
     message = TextSendMessage(text=f'{name}歡迎加入')
     line_bot_api.reply_message(event.reply_token, message)
-
-
-@app.route("/webhook", methods=["POST"])
-def webhook_handler():
-    signature = request.headers["X-Line-Signature"]
-    # get request body as text
-    body = request.get_data(as_text=True)
-    app.logger.info(f"Request body: {body}")
-
-    # parse webhook body
-    try:
-        events = handler.handle(body, signature)
-    except InvalidSignatureError:
-        abort(400)
-
-    # if event is MessageEvent and message is TextMessage, then echo text
-    for event in events:
-        if not isinstance(event, MessageEvent):
-            continue
-        if not isinstance(event.message, TextMessage):
-            continue
-        if not isinstance(event.message.text, str):
-            continue
-        print(f"\nFSM STATE: {machine.state}")
-        print(f"REQUEST BODY: \n{body}")
-        response = machine.advance(event)
-        if response == False:
-            send_text_message(event.reply_token, "Not Entering any State")
-
-    return "OK"
 
 
 @app.route("/show-fsm", methods=["GET"])
