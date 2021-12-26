@@ -246,12 +246,10 @@ def webhook_handler():
 
         elif machine.state == 'user' and 'sport' in msg:
             machine.state = 'sport_input_type'
-            # send_text_message(event.reply_token,
-            #                   'sport')
             machine.exercise_in(event)
         elif machine.state == 'sport_input_type':
             machine.state = 'sport_input_time'
-            machine.input_exercise_type(event)
+            machine.input_exercise_type(event, msg)
         elif machine.state == 'sport_input_time':
             machine.state = 'sport_final'
             machine.input_exercise_time(event)

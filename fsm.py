@@ -93,29 +93,30 @@ class TocMachine(GraphMachine):
         self.go_back()
 
     def exercise_in(self, event):
-        title = '請問想要吃早餐 午餐 還是晚餐'
-        text = '讓healthy bear來幫你選擇最適合你的食物'
+        title = '運動類型'
+        text = '『有氧運動』增強心肺耐力和免疫力\n『肌力重量訓練』使肌肉結實的運動 可修飾身材'
         btn = [
             MessageTemplateAction(
-                label='早餐',
-                text='breakfast'
+                label='有氧',
+                text='aerobic'
             ),
             MessageTemplateAction(
-                label='午餐',
-                text='lunch'
+                label='重訓',
+                text='retrain'
             ),
             MessageTemplateAction(
-                label='晚餐',
-                text='dinner'
+                label='高強有氧',
+                text='high_aerobic'
             ),
         ]
-        url = 'https://i.imgur.com/NT0a6ID.png'
+        url = 'https://i.imgur.com/Z0ClMg4.jpeg'
         send_button_message(event.reply_token, title, text, btn, url)
 
-    def input_exercise_type(self, event):
-        self.sport_type = event.message.text
+    def input_exercise_type(self, event, msg):
+        self.sport_type = msg
+        print('type'+self.sport_type)
         title = '選擇運動類時間'
-        text = ''
+        text = '多多運動'
         btn = [
             MessageTemplateAction(
                 label='10',
@@ -124,10 +125,6 @@ class TocMachine(GraphMachine):
             MessageTemplateAction(
                 label='20',
                 text='20'
-            ),
-            MessageTemplateAction(
-                label='30',
-                text='30'
             )
         ]
         url = 'https://i.imgur.com/0kUpCmW.jpeg'
@@ -135,5 +132,19 @@ class TocMachine(GraphMachine):
 
     def input_exercise_time(self, event):
         self.sport_time = int(event.message.text)
-        Aerobic＿10(event.reply_token)
+        if self.sport_type == 'aerobic':
+            if self.sport_time == 10:
+                aerobic10(event.reply_token)
+            else:
+                aerobic20(event.reply_token)
+        elif self.sport_type == 'retrain':
+            if self.sport_time == 10:
+                retrain10(event.reply_token)
+            else:
+                retrain20(event.reply_token)
+        else:
+            if self.sport_time == 10:
+                hi_aerobic10(event.reply_token)
+            else:
+                hi_aerobic20(event.reply_token)
         self.go_back()
