@@ -158,23 +158,20 @@ def webhook_handler():
         # response = machine.advance(event)
 
         # if response == False:
+        msg = event.message.text.lower()
         if machine.state == 'user' and event.message.text.lower() == 'dine':
             machine.state = 'dine_input_time'
-            # send_text_message(event.reply_token,
-            #                   'dine%s' % {machine.state})
-            # machine.is_going_to_dine(event)
-            # print(event)
             machine.is_going_to_dine(event)
             print(f'\nFSM STATE: {machine.state}')
-        elif machine.state == 'dine_input_time' and event.message.text.lower() == 'breakfast':
+        elif machine.state == 'dine_input_time' and 'breakfast' in msg:
             machine.state = 'dine_breakfast'
             machine.input_breakfast(event)
             print(f'\nbreakfast FSM STATE: {machine.state}')
-        elif machine.state == 'dine_input_time' and event.message.text.lower() == 'lunch':
+        elif machine.state == 'dine_input_time' and 'lunch' in msg:
             machine.state = 'dine_lunch'
             machine.input_lunch(event)
             print(f'\nlunch FSM STATE: {machine.state}')
-        elif machine.state == 'dine_input_time' and event.message.text.lower() == 'dinner':
+        elif machine.state == 'dine_input_time' and 'dinner' in msg:
             machine.state = 'dine_dinner'
             machine.input_dinner(event)
             print(f'\ndinner FSM STATE: {machine.state}')
