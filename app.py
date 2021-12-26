@@ -20,7 +20,9 @@ load_dotenv()
 
 machine = TocMachine(
     states=["user", "dine_input_time",
-            "dine_breakfast", "dine_lunch", "dine_dinner"],
+            "dine_breakfast", "dine_lunch", "dine_dinner",
+            "BMI_input_height", "BMI_input_weight", "BMI_input_gender", "BMI_final"
+            ],
     transitions=[
         # dine
         {"trigger": "advance", "source": "user",
@@ -31,9 +33,32 @@ machine = TocMachine(
             "dest": "dine_lunch", "conditions": "input_lunch"},
         {"trigger": "advance", "source": "dine_input_time",
             "dest": "dine_dinner", "conditions": "input_dinner"},
-        # go back
+
+        # BMI
+        {"trigger": "advance", "source": "user",
+            "dest": "BMI_input_height", "conditions": "BMI"},
+        {"trigger": "advance", "source": "BMI_input_height",
+            "dest": "BMI_input_weight", "conditions": "BMI_input_height"},
+        {"trigger": "advance", "source": "BMI_input_weight",
+            "dest": "BMI_final", "conditions": "BMI_input_gender"},
+        # water
+        {"trigger": "advance", "source": "user",
+            "dest": "water_input_weight", "conditions": "drink_water"},
+        {"trigger": "advance", "source": "water_input_weight",
+            "dest": "water_input_bottle_storage", "conditions": "water_input_weight"},
+        {"trigger": "advance", "source": "water_input_bottle_storage",
+            "dest": "water_final", "conditions": "water_input_bottle_storage"},
+
+        # exercise
+        {"trigger": "advance", "source": "user",
+            "dest": "sport_input_type", "conditions": "exercise_in"},
+        {"trigger": "advance", "source": "sport_input_type",
+            "dest": "sport_input_time", "conditions": "input_exercise_type"},
+        {"trigger": "advance", "source": "sport_input_time",
+            "dest": "sport_final", "conditions": "input exercise time"},
+
         {"trigger": "go_back", "source": ["dine_breakfast", "dine_lunch",
-                                          "dine_dinner"], "dest": "user"},
+                                          "dine_dinner", 'BMI_final', 'water_final', 'sport_final'], "dest": "user"},
     ],
     initial="user",
     auto_transitions=False,
@@ -175,6 +200,61 @@ def webhook_handler():
             machine.state = 'dine_dinner'
             machine.input_dinner(event)
             print(f'\ndinner FSM STATE: {machine.state}')
+        elif machine.state == 'user' and 'bmi' in msg:
+            machine.state = 'BMI_input_height'
+            machine.BMI(event)
+            print(f'\nBMIFSM STATE: {machine.state}')
+        elif machine.state == 'BMI_input_height':
+            try:
+                # Convert it into float
+                val = float(msg)
+                machine.state = 'BMI_input_weight'
+                machine.BMI_input_height(event, val)
+            except ValueError:
+                send_text_message(event.reply_token,
+                                  'please input your height in integer')
+        elif machine.state == 'BMI_input_weight':
+            try:
+                # Convert it into float
+                val = float(msg)
+                machine.state = 'BMI_final'
+                machine.BMI_input_weight(event, val)
+            except ValueError:
+                send_text_message(event.reply_token,
+                                  'please input your weight in integer')
+        elif machine.state == 'user' and 'water' in msg:
+            machine.state = 'water_input_weight'
+            machine.drink_water(event)
+        elif machine.state == 'water_input_weight':
+            try:
+                # Convert it into int
+                val = int(msg)
+                machine.state = 'water_input_bottle_storage'
+                machine.water_input_weight(event, val)
+            except ValueError:
+                send_text_message(event.reply_token,
+                                  'please input your weight in integer')
+        elif machine.state == 'water_input_bottle_storage':
+            try:
+                # Convert it into int
+                val = int(msg)
+                machine.state = 'water_final'
+                machine.water_input_bottle_storage(event, val)
+            except ValueError:
+                send_text_message(event.reply_token,
+                                  'please input your bottle storage in integer')
+
+        elif machine.state == 'user' and 'sport' in msg:
+            machine.state = 'sport_input_type'
+            # send_text_message(event.reply_token,
+            #                   'sport')
+            machine.exercise_in(event)
+        elif machine.state == 'sport_input_type':
+            machine.state = 'sport_input_time'
+            machine.input_exercise_type(event)
+        elif machine.state == 'sport_input_time':
+            machine.state = 'sport_final'
+            machine.input_exercise_time(event)
         else:
             machine.state = 'user'
             send_text_message(event.reply_token, 'default')
