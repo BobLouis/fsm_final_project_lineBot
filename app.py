@@ -26,7 +26,7 @@ machine = TocMachine(
         {"trigger": "advance", "source": "user",
             "dest": "dine_input_time", "conditions": "is_going_to_dine"},
         {"trigger": "advance", "source": "dine_input_time",
-            "dest": "dine_breakfast", "conditions": "input breakfast"},
+            "dest": "dine_breakfast", "conditions": "input_breakfast"},
         {"trigger": "advance", "source": "dine_input_time",
             "dest": "dine_lunch", "conditions": "input_lunch"},
         {"trigger": "advance", "source": "dine_input_time",
@@ -155,16 +155,33 @@ def webhook_handler():
         print(f'\nFSM STATE: {machine.state}')
         print(f'REQUEST BODY: \n{body}')
 
-        response = machine.advance(event)
+        # response = machine.advance(event)
 
-        if response == False:
-            if event.message.text.lower() == 'dine':
-                machine.state = 'dine_input_time'
-                # send_text_message(event.reply_token,
-                #                   'dine%s' % {machine.state})
-                # machine.is_going_to_dine(event)
-                # print(event)
-                # print(f'\nFSM STATE: {machine.state}')
+        # if response == False:
+        if machine.state == 'user' and event.message.text.lower() == 'dine':
+            machine.state = 'dine_input_time'
+            # send_text_message(event.reply_token,
+            #                   'dine%s' % {machine.state})
+            # machine.is_going_to_dine(event)
+            # print(event)
+            machine.is_going_to_dine(event)
+            print(f'\nFSM STATE: {machine.state}')
+        elif machine.state == 'dine_input_time' and event.message.text.lower() == 'breakfast':
+            machine.state = 'dine_breakfast'
+            machine.input_breakfast(event)
+            print(f'\nbreakfast FSM STATE: {machine.state}')
+        elif machine.state == 'dine_input_time' and event.message.text.lower() == 'lunch':
+            machine.state = 'dine_lunch'
+            machine.input_lunch(event)
+            print(f'\nlunch FSM STATE: {machine.state}')
+        elif machine.state == 'dine_input_time' and event.message.text.lower() == 'dinner':
+            machine.state = 'dine_dinner'
+            machine.input_dinner(event)
+            print(f'\ndinner FSM STATE: {machine.state}')
+        else:
+            machine.state = 'user'
+            send_text_message(event.reply_token, 'default')
+            print(f'\nFSM STATE: {machine.state}')
 
     return 'OK'
 

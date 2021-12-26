@@ -12,28 +12,23 @@ class TocMachine(GraphMachine):
         print("which meal you want to choose")
         send_text_message(event.reply_token,
                           'which meal you want to eat')
-        return text.lower() == "go to state1"
+        return text.lower() == "go to dine_input_time"
 
-    def is_going_to_state2(self, event):
+    def input_breakfast(self, event):
         text = event.message.text
-        return text.lower() == "go to state2"
-
-    def on_enter_state1(self, event):
-        print("I'm entering state1")
-
-        reply_token = event.reply_token
-        send_text_message(reply_token, "Trigger state1")
+        print("breakfast")
+        send_text_message(event.reply_token,
+                          'breakfast')
         self.go_back()
 
-    def on_exit_state1(self):
-        print("Leaving state1")
-
-    def on_enter_state2(self, event):
-        print("I'm entering state2")
-
-        reply_token = event.reply_token
-        send_text_message(reply_token, "Trigger state2")
+    def input_lunch(self, event):
+        print("lunch")
+        send_text_message(event.reply_token,
+                          'lunch')
         self.go_back()
 
-    def on_exit_state2(self):
-        print("Leaving state2")
+    def input_dinner(self, event):
+        print("dinner")
+        send_text_message(event.reply_token,
+                          'dinner')
+        self.go_back()
