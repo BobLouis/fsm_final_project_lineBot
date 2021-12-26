@@ -7,8 +7,11 @@ class TocMachine(GraphMachine):
     def __init__(self, **machine_configs):
         self.machine = GraphMachine(model=self, **machine_configs)
 
-    def is_going_to_state1(self, event):
+    def is_going_to_dine(self, event):
         text = event.message.text
+        print("which meal you want to choose")
+        send_text_message(event.reply_token,
+                          'which meal you want to eat')
         return text.lower() == "go to state1"
 
     def is_going_to_state2(self, event):
