@@ -21,7 +21,8 @@ load_dotenv()
 machine = TocMachine(
     states=["user", "dine_input_time",
             "dine_breakfast", "dine_lunch", "dine_dinner",
-            "BMI_input_height", "BMI_input_weight", "BMI_input_gender", "BMI_final"
+            "BMI_input_height", "BMI_input_weight", "BMI_final",
+            "sport_input_type", "sport_input_time", "sport_final"
             ],
     transitions=[
         # dine
@@ -40,7 +41,7 @@ machine = TocMachine(
         {"trigger": "advance", "source": "BMI_input_height",
             "dest": "BMI_input_weight", "conditions": "BMI_input_height"},
         {"trigger": "advance", "source": "BMI_input_weight",
-            "dest": "BMI_final", "conditions": "BMI_input_gender"},
+            "dest": "BMI_final", "conditions": "BMI_input_weight"},
         # water
         {"trigger": "advance", "source": "user",
             "dest": "water_input_weight", "conditions": "drink_water"},
