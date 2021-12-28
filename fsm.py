@@ -148,3 +148,27 @@ class TocMachine(GraphMachine):
             else:
                 hi_aerobic20(event.reply_token)
         self.go_back()
+
+    def default_msg(self, event):
+        title = '你好 我是你的健康小助手 healthy bear'
+        text = '我可以推薦 好吃 健康的台南美食 \n以及隨時注意你的健康'
+        btn = [
+            MessageTemplateAction(
+                label='吃什麼',
+                text='dine'
+            ),
+            MessageTemplateAction(
+                label='測量BMI',
+                text='BMI'
+            ),
+            MessageTemplateAction(
+                label='喝水去',
+                text='water'
+            ),
+            MessageTemplateAction(
+                label='運動去',
+                text='sport'
+            ),
+        ]
+        url = 'https://i.imgur.com/NT0a6ID.png'
+        send_button_message(event.reply_token, title, text, btn, url)

@@ -256,7 +256,8 @@ def webhook_handler():
             machine.input_exercise_time(event)
         else:
             machine.state = 'user'
-            send_text_message(event.reply_token, 'default')
+            # send_text_message(event.reply_token, 'default')
+            machine.default_msg(event)
             print(f'\nFSM STATE: {machine.state}')
 
     return 'OK'
