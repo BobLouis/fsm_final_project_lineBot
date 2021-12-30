@@ -75,7 +75,7 @@ machine = TocMachine(
 
 
         {"trigger": "go_back", "source": ["dine_breakfast", "dine_lunch",
-                                          "dine_dinner", 'BMI_final', 'water_final', 'sport_final', "news"], "dest": "user"},
+                                          "dine_dinner", 'BMI_final', 'water_final', 'sport_final', "news_social", "news_health"], "dest": "user"},
     ],
     initial="user",
     auto_transitions=False,

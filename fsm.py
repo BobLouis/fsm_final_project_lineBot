@@ -192,6 +192,8 @@ class TocMachine(GraphMachine):
 
     def select_social_news(self, event):
         send_text_message(event.reply_token, scrapenews_social())
+        self.go_back()
 
     def select_health_news(self, event):
         send_text_message(event.reply_token, scrapenews_health())
+        self.go_back()
