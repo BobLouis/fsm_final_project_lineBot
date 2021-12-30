@@ -3,6 +3,8 @@ import os
 from linebot import LineBotApi, WebhookParser
 from linebot.models import MessageEvent, TextMessage, TextSendMessage, TemplateSendMessage, ImageCarouselColumn, ImageCarouselTemplate, URITemplateAction, ButtonsTemplate, MessageTemplateAction, ImageSendMessage
 from linebot.models import ImageCarouselColumn, URITemplateAction, MessageTemplateAction, TemplateSendMessage, CarouselTemplate, CarouselColumn, PostbackTemplateAction
+from bs4 import BeautifulSoup
+import requests
 channel_access_token = os.getenv("LINE_CHANNEL_ACCESS_TOKEN", None)
 
 
@@ -658,3 +660,45 @@ def hi_aerobic20(reply_token):
     )
     line_bot_api.reply_message(reply_token, Carousel_template)
     return 'ok'
+
+
+def scrapenews_social():
+    response = requests.get(
+        "https://www.ettoday.net/news/focus/%E9%A6%96%E9%A0%81/%E9%A0%AD%E6%A2%9D/")
+    soup = BeautifulSoup(response.content, "html.parser")
+    sel = soup.select("div.part_list_3 a")
+    content = ""
+    for i in range(3):
+        content += "第{}則:".format(i+1)+sel[i]["title"]+"\n"+"詳細內容請洽:" + \
+            "https://www.ettoday.net/"+sel[i]["href"]+"\n\n\n"
+    return content
+
+
+def scrapenews_health():
+    response = requests.get(
+        "https://health.ettoday.net/")
+    soup = BeautifulSoup(response.content, "html.parser")
+    sel = soup.select("div.box_2 a")
+    # print(sel)
+    # print()
+    # print(sel[0]['title'])
+    content = ""
+    for i in range(3):
+        content += "第{}則:".format(i+1)+sel[i]["title"]+"\n"+"詳細內容請洽:" + \
+            ""+sel[i]["href"]+"\n\n\n"
+    return content
+
+
+# def scrapenews():
+#     response = requests.get(
+#         "https://health.ettoday.net/")
+#     soup = BeautifulSoup(response.content, "html.parser")
+#     sel = soup.select("div.box_2 a")
+#     print(sel)
+#     print()
+#     print(sel[0]['title'])
+#     content = ""
+#     for i in range(3):
+#         content += "第{}則:".format(i+1)+sel[i]["title"]+"\n"+"詳細內容請洽:" + \
+#             ""+sel[i]["href"]+"\n\n\n"
+#     return content

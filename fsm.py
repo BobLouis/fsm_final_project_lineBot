@@ -169,6 +169,29 @@ class TocMachine(GraphMachine):
                 label='運動去',
                 text='sport'
             ),
+
         ]
         url = 'https://i.imgur.com/NT0a6ID.png'
         send_button_message(event.reply_token, title, text, btn, url)
+
+    def select_news(self, event):
+        title = '請選擇你想看的新聞類型'
+        text = '君子不出門 能知天下事'
+        btn = [
+            MessageTemplateAction(
+                label='健康版',
+                text='health'
+            ),
+            MessageTemplateAction(
+                label='社會版',
+                text='social'
+            ),
+        ]
+        url = 'https://i.imgur.com/luJ0Mb7.jpeg'
+        send_button_message(event.reply_token, title, text, btn, url)
+
+    def select_social_news(self, event):
+        send_text_message(event.reply_token, scrapenews_social())
+
+    def select_health_news(self, event):
+        send_text_message(event.reply_token, scrapenews_health())

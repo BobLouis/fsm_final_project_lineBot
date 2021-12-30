@@ -22,7 +22,8 @@ machine = TocMachine(
     states=["user", "dine_input_time",
             "dine_breakfast", "dine_lunch", "dine_dinner",
             "BMI_input_height", "BMI_input_weight", "BMI_final",
-            "sport_input_type", "sport_input_time", "sport_final"
+            "sport_input_type", "sport_input_time", "sport_final",
+            "news", "news_social", "news_health"
             ],
     transitions=[
         # dine
@@ -58,8 +59,23 @@ machine = TocMachine(
         {"trigger": "advance", "source": "sport_input_time",
             "dest": "sport_final", "conditions": "input exercise time"},
 
+        # news
+        {
+            "trigger": "advance", "source": "user",
+            "dest": "news", "conditions": "select_news",
+        },
+        {
+            "trigger": "advance", "source": "news",
+            "dest": "news_social", "conditions": "select_social_news",
+        },
+        {
+            "trigger": "advance", "source": "news",
+            "dest": "news_health", "conditions": "select_health_news",
+        },
+
+
         {"trigger": "go_back", "source": ["dine_breakfast", "dine_lunch",
-                                          "dine_dinner", 'BMI_final', 'water_final', 'sport_final'], "dest": "user"},
+                                          "dine_dinner", 'BMI_final', 'water_final', 'sport_final', "news"], "dest": "user"},
     ],
     initial="user",
     auto_transitions=False,
@@ -254,6 +270,18 @@ def webhook_handler():
         elif machine.state == 'sport_input_time':
             machine.state = 'sport_final'
             machine.input_exercise_time(event)
+        elif machine.state == 'user' and 'news' in msg:
+            machine.state = 'news'
+            machine.select_news(event)
+            print(f'\nBMIFSM STATE: {machine.state}')
+        elif machine.state == 'news':
+            if(msg == 'health'):
+                machine.state = 'news_health'
+                machine.select_health_news(event)
+            elif(msg == 'social'):
+                machine.state = 'news_social'
+                machine.select_social_news(event)
+
         else:
             machine.state = 'user'
             # send_text_message(event.reply_token, 'default')
