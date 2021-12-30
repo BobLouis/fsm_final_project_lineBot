@@ -61,7 +61,7 @@ def send_breakfast(reply_token):
             columns=[
                 # 1 無名早點
                 CarouselColumn(
-                    thumbnail_image_url='https://i.imgur.com/8BlV8Kc.jpeg',
+                    thumbnail_image_url='https://i.imgur.com/d6RvEjD.jpeg',
                     title='無名早點',
                     text='活力早點  成大學生喜愛の早餐店之ㄧ',
                     actions=[
@@ -81,7 +81,7 @@ def send_breakfast(reply_token):
                 ),
                 # 2 阿公阿婆蛋餅
                 CarouselColumn(
-                    thumbnail_image_url='https://i.imgur.com/8BlV8Kc.jpeg',
+                    thumbnail_image_url='https://i.imgur.com/0yiztd7.jpeg',
                     title='阿公阿婆蛋餅',
                     text='超大份量粉漿蛋餅銅板價～台南傳統古早味',
                     actions=[
@@ -101,7 +101,7 @@ def send_breakfast(reply_token):
                 ),
                 # 3 春牛豆漿大王
                 CarouselColumn(
-                    thumbnail_image_url='https://i.imgur.com/8BlV8Kc.jpeg',
+                    thumbnail_image_url='https://i.imgur.com/vidzhE9.jpeg',
                     title='春牛豆漿大王',
                     text='台南美食北區。鴨母寮市場旁邊，來自台東知名的早餐店，',
                     actions=[
@@ -119,9 +119,9 @@ def send_breakfast(reply_token):
                         )
                     ]
                 ),
-                # 3 益緣早餐
+                # 4 益緣早餐
                 CarouselColumn(
-                    thumbnail_image_url='https://i.imgur.com/8BlV8Kc.jpeg',
+                    thumbnail_image_url='https://i.imgur.com/cwmgljt.jpeg',
                     title='益緣早餐',
                     text='台南 成大周邊 - 益緣早餐 [早餐店',
                     actions=[
@@ -139,9 +139,9 @@ def send_breakfast(reply_token):
                         )
                     ]
                 ),
-                # 4 祝君早安
+                # 5 祝君早安
                 CarouselColumn(
-                    thumbnail_image_url='https://i.imgur.com/8BlV8Kc.jpeg',
+                    thumbnail_image_url='https://i.imgur.com/QH21mCa.jpeg',
                     title='祝君早安',
                     text='好吃的古早味粉漿蛋餅，加起司更美味～',
                     actions=[
@@ -152,26 +152,6 @@ def send_breakfast(reply_token):
                         URITemplateAction(
                             label='看菜單 地圖',
                             uri='https://www.google.com.tw/maps/place/%E7%A5%9D%E5%90%9B%E6%97%A9%E5%AE%89/@22.9956804,120.2148626,3a,75y,90t/data=!3m8!1e2!3m6!1sAF1QipPsy1o8PKN5WLy-ztkWOdD9uhcPu2fABJMHg-UE!2e10!3e12!6s%2F%2Flh5.googleusercontent.com%2F-QI2qeCdjw8E%2FYBidivtngOI%2FAAAAAAAASf4%2FHWnUst0zvgAgSSTM-GvkeZFLIr1PTf-aQCJUFGAYYCw%2Fw224-h298-k-no%2F!7i3024!8i4032!4m7!3m6!1s0x346e77406e0b155b:0xe4667ef041a9244a!8m2!3d22.9956804!4d120.2148626!14m1!1BCgIYIQ'
-                        ),
-                        MessageTemplateAction(
-                            label='再吃一次',
-                            text='dine'
-                        )
-                    ]
-                ),
-                # 5 the loft
-                CarouselColumn(
-                    thumbnail_image_url='https://i.imgur.com/8BlV8Kc.jpeg',
-                    title='the loft',
-                    text='｜B&B｜Restaurant-限量私房手作早午餐．不限時工業風餐廳',
-                    actions=[
-                        URITemplateAction(
-                            label='更多圖片與評論',
-                            uri='https://ifoodie.tw/restaurant/5c1072bbf52468366de00416-28-the-loft'
-                        ),
-                        URITemplateAction(
-                            label='看菜單 地圖',
-                            uri='https://www.google.com.tw/maps/place/28+the+loft/@23.0062546,120.2069486,3a,75y,90t/data=!3m8!1e2!3m6!1sAF1QipP5CdYAU3AzTNtzVy76d0A2lAQLZJXaGVhc0bY!2e10!3e12!6s%2F%2Flh3.googleusercontent.com%2F-BVDYA0brkWg%2FXwRJ1_wXOzI%2FAAAAAAABnsw%2Fqf7ZryV6y60TZ-lHnaOSIEE6UkM9bjLvwCLIBGAYYCw%2Fw224-h335-k-no%2F!7i1069!8i1600!4m10!3m9!1s0x346e77d97a1ed76b:0xeb62acab1587c85a!5m2!4m1!1i2!8m2!3d23.0062546!4d120.2069486!14m1!1BCgIYIA'
                         ),
                         MessageTemplateAction(
                             label='再吃一次',
@@ -194,7 +174,7 @@ def send_lunch(reply_token):
             columns=[
                 # 1 開元路無名虱目魚
                 CarouselColumn(
-                    thumbnail_image_url='https://i.imgur.com/8BlV8Kc.jpeg',
+                    thumbnail_image_url='https://i.imgur.com/pRInZRQ.jpeg',
                     title='開元路無名虱目魚',
                     text='沒有招牌無名小吃 台南人早午餐就吃肉臊飯-開元路無名虱目魚 ‧ 肉燥飯 ',
                     actions=[
@@ -214,7 +194,7 @@ def send_lunch(reply_token):
                 ),
                 # 2 貴一郎 S.R.T 燒肉
                 CarouselColumn(
-                    thumbnail_image_url='https://i.imgur.com/8BlV8Kc.jpeg',
+                    thumbnail_image_url='https://i.imgur.com/cclzmBS.jpeg',
                     title='貴一郎 S.R.T 燒肉',
                     text='台南最厲害的現烤和牛便當 |台南美食| |燒肉推薦| |燒肉便當|',
                     actions=[
@@ -234,13 +214,13 @@ def send_lunch(reply_token):
                 ),
                 # 3 蚵男燒烤海物
                 CarouselColumn(
-                    thumbnail_image_url='https://i.imgur.com/8BlV8Kc.jpeg',
+                    thumbnail_image_url='https://i.imgur.com/zrrQfKm.jpeg',
                     title='蚵男燒烤海物',
                     text='蚵男生蠔海物燒烤 台南北區 — 幸福平價海味大爆炸的好滋味',
                     actions=[
                         URITemplateAction(
                             label='更多圖片與評論',
-                            uri='https://ifoodie.tw/restaurant/594570f92756dd524dd08e66-%E6%98%A5%E7%89%9B%E8%B1%86%E6%BC%BF%E5%A4%A7%E7%8E%8B'
+                            uri='https://ifoodie.tw/restaurant/5598ebbc40b5e30f5545f4f5-%E8%9A%B5%E7%94%B7%E7%87%92%E7%83%A4%E6%B5%B7%E7%89%A9'
                         ),
                         URITemplateAction(
                             label='看菜單 地圖',
@@ -254,7 +234,7 @@ def send_lunch(reply_token):
                 ),
                 # 4 當月麵店
                 CarouselColumn(
-                    thumbnail_image_url='https://i.imgur.com/8BlV8Kc.jpeg',
+                    thumbnail_image_url='https://i.imgur.com/1j2KBnW.jpeg',
                     title='當月麵店',
                     text='成大周邊日式老宅文青麵店 當月麵店 台南麵店 台南美',
                     actions=[
@@ -272,9 +252,9 @@ def send_lunch(reply_token):
                         )
                     ]
                 ),
-                # 4 富盛號碗粿
+                # 5 富盛號碗粿
                 CarouselColumn(
-                    thumbnail_image_url='https://i.imgur.com/8BlV8Kc.jpeg',
+                    thumbnail_image_url='https://i.imgur.com/L4aQ8ju.jpeg',
                     title='富盛號碗粿',
                     text='國華街美食 | 台南 富盛號碗粿 民國36年開始飄香的好味道',
                     actions=[
@@ -292,26 +272,7 @@ def send_lunch(reply_token):
                         )
                     ]
                 ),
-                # 5 the loft
-                CarouselColumn(
-                    thumbnail_image_url='https://i.imgur.com/8BlV8Kc.jpeg',
-                    title='八三鱔魚意麵 ',
-                    text='中西區｜八三意麵，酸甜夠味乾炒鱔魚意麵，厚厚腰子湯必喝推薦',
-                    actions=[
-                        URITemplateAction(
-                            label='更多圖片與評論',
-                            uri='https://ifoodie.tw/restaurant/587d0aba2756dd3ab6f6b50f-%E5%85%AB%E4%B8%89%E9%B1%94%E9%AD%9A%E6%84%8F%E9%BA%B5'
-                        ),
-                        URITemplateAction(
-                            label='看菜單 地圖',
-                            uri='https://www.google.com.tw/maps/place/%E5%85%AB%E4%B8%89%E6%84%8F%E9%BA%B5/@22.9962398,120.2045612,3a,75y,90t/data=!3m8!1e2!3m6!1sAF1QipPokZ1b1X87lvDt3hsNatme_9F6oeJr1iePHYhE!2e10!3e12!6s%2F%2Flh6.googleusercontent.com%2F-HA6r15_97IM%2FXyudI76tGhI%2FAAAAAAABOTY%2F2RcWKjr1BPknAYYZGsZ9Doa2jH0bGu4pwCLIBGAYYCw%2Fw224-h398-k-no%2F!7i720!8i1280!4m7!3m6!1s0x346e7661fa48f219:0xa88b8c4ff391c65d!8m2!3d22.9962398!4d120.2045612!14m1!1BCgIYIQ'
-                        ),
-                        MessageTemplateAction(
-                            label='再吃一次',
-                            text='dine'
-                        )
-                    ]
-                ),
+
             ]
         )
     )
@@ -327,7 +288,7 @@ def send_dinner(reply_token):
             columns=[
                 # 1 寬窄巷子四川麻辣鍋
                 CarouselColumn(
-                    thumbnail_image_url='https://i.imgur.com/8BlV8Kc.jpeg',
+                    thumbnail_image_url='https://i.imgur.com/w75MocW.jpeg',
                     title='寬窄巷子四川麻辣鍋',
                     text='純正濃郁麻香四川麻辣鍋！吃了走路都有風！人氣火鍋輕鬆在家嚐~',
                     actions=[
@@ -347,7 +308,7 @@ def send_dinner(reply_token):
                 ),
                 # 2 劉家莊牛肉爐
                 CarouselColumn(
-                    thumbnail_image_url='https://i.imgur.com/8BlV8Kc.jpeg',
+                    thumbnail_image_url='https://i.imgur.com/2Zj21jm.jpeg',
                     title='劉家莊牛肉爐',
                     text='台南永康美食 溫體牛涮涮鍋、牛肉火鍋 用餐空間舒適、有免費大型停車場',
                     actions=[
@@ -367,7 +328,7 @@ def send_dinner(reply_token):
                 ),
                 # 3 輝哥本土牛肉爐
                 CarouselColumn(
-                    thumbnail_image_url='https://i.imgur.com/8BlV8Kc.jpeg',
+                    thumbnail_image_url='https://i.imgur.com/xm2SIsh.jpeg',
                     title='輝哥本土牛肉爐 ',
                     text='台南牛肉爐-輝哥本土牛肉爐 肉燥飯吃到飽 溫體牛肉湯超暖',
                     actions=[
@@ -387,7 +348,7 @@ def send_dinner(reply_token):
                 ),
                 # 4 尖叫 SCREAM 精緻炭火燒肉
                 CarouselColumn(
-                    thumbnail_image_url='https://i.imgur.com/8BlV8Kc.jpeg',
+                    thumbnail_image_url='https://i.imgur.com/4ThK70M.jpeg',
                     title='尖叫 SCREAM 精緻炭火燒肉',
                     text='高檔吃到飽燒肉 Scream 尖叫精緻炭火燒肉 蝦蟹海鮮吃到爽!!',
                     actions=[
@@ -405,9 +366,9 @@ def send_dinner(reply_token):
                         )
                     ]
                 ),
-                # 4 初幸居食屋
+                # 5 初幸居食屋
                 CarouselColumn(
-                    thumbnail_image_url='https://i.imgur.com/8BlV8Kc.jpeg',
+                    thumbnail_image_url='https://i.imgur.com/kFUGYHP.jpeg',
                     title='初幸居食屋',
                     text='日料火鍋「初幸 居食屋」超道地關西壽喜燒！北海道A5和牛、日本廣島牡蠣！',
                     actions=[
@@ -425,26 +386,7 @@ def send_dinner(reply_token):
                         )
                     ]
                 ),
-                # 5 丼Fun
-                CarouselColumn(
-                    thumbnail_image_url='https://i.imgur.com/8BlV8Kc.jpeg',
-                    title='丼Fun ',
-                    text='台南日式丼飯便當／牛舌雙主餐便當新上市／外帶限定75折起／每日限量供應／雙重口感一次滿足',
-                    actions=[
-                        URITemplateAction(
-                            label='更多圖片與評論',
-                            uri='https://ifoodie.tw/restaurant/5a7f35482756dd2af0c69ba6-%E4%B8%BCFun-%E5%8F%B0%E5%8D%97%E5%BA%97'
-                        ),
-                        URITemplateAction(
-                            label='看菜單 地圖',
-                            uri='https://www.google.com.tw/maps/place/%E4%B8%BCFun%E5%8F%B0%E5%8D%97%E5%BA%97/@22.9826932,120.2049225,3a,75y,90t/data=!3m8!1e2!3m6!1sAF1QipPYudQRJ4VIGna38PbwczKXwvZOG3zQ5UgfAFIR!2e10!3e12!6s%2F%2Flh6.googleusercontent.com%2F-Kn1UZYgy1d8%2FYTw3svDsOHI%2FAAAAAAAAATE%2F43cv2LfitMcHFzWqyW_G4gTXy29-YuDHACJUFGAYYCw%2Fw397-h298-k-no%2F!7i4032!8i3024!4m7!3m6!1s0x346e767e298cecbd:0x25ed3c79538bbf4b!8m2!3d22.9826932!4d120.2049225!14m1!1BCgIYIQ'
-                        ),
-                        MessageTemplateAction(
-                            label='再吃一次',
-                            text='dine'
-                        )
-                    ]
-                ),
+
             ]
         )
     )
