@@ -17,6 +17,9 @@ from utils import send_text_message
 # for getenv
 load_dotenv()
 
+# record user state
+user_state = {}
+
 
 machine = TocMachine(
     states=["user", "dine_input_time",
@@ -83,75 +86,6 @@ machine = TocMachine(
 )
 
 
-# machine = TocMachine(
-#     states=["user", "dine_input_time", "dine_breakfast", "dine_lunch", "dine_dinner",
-#             "BMI_input_height", "BMI_input_weight", "BMI_input_gender", "BMI_final",
-#             "water_input", "water_input_weight", "water_input_bottle_storage", "water_final",
-#             "sport_input_type", "sport_input_time", "sport_final"],
-#     transitions=[
-#         # dine
-#         {"trigger": "advance", "source": "user",
-#             "dest": "dine_input_time", "conditions": "is_going_to_dine"},
-#         {"trigger": "advance", "source": "dine_input_time",
-#             "dest": "dine_breakfast", "conditions": "input breakfast"},
-#         {"trigger": "advance", "source": "dine_input_time",
-#             "dest": "dine_lunch", "conditions": "input_lunch"},
-#         {"trigger": "advance", "source": "dine_input_time",
-#             "dest": "dine_dinner", "conditions": "input_dinner"},
-#         # BMI
-#         {"trigger": "advance", "source": "user",
-#             "dest": "BMI_input_height", "conditions": "BMI"},
-#         {"trigger": "advance", "source": "BMI_input_height",
-#             "dest": "BMI_input_weight", "conditions": "BMI_input_height"},
-#         {"trigger": "advance", "source": "BMI_input_weight",
-#             "dest": "BMI_input_gender", "conditions": "BMI_input_weight"},
-#         {"trigger": "advance", "source": "BMI_input_gender",
-#             "dest": "BMI_final", "conditions": "BMI_input_gender"},
-#         # water
-#         {"trigger": "advance", "source": "user",
-#             "dest": "water_input_weight", "conditions": "drink water"},
-#         {"trigger": "advance", "source": "water_input_weight",
-#             "dest": "water_input_bottle_storage", "conditions": "drink water_input weight"},
-#         {"trigger": "advance", "source": "water_input_bottle_storage",
-#             "dest": "water_final", "conditions": "drink water_input bottlr storage"},
-#         # exercise
-#         {"trigger": "advance", "source": "user",
-#             "dest": "sport_input_type", "conditions": "exercise"},
-#         {"trigger": "advance", "source": "sport_input_type",
-#             "dest": "sport_input_time", "conditions": "input exercise type"},
-#         {"trigger": "advance", "source": "sport_input_time",
-#             "dest": "sport_final", "conditions": "input exercise time"},
-#         # go back
-#         {"trigger": "go_back", "source": ["dine_breakfast", "dine_lunch",
-#                                           "dine_dinner", "BMI_final", "water_final", "sport_final"], "dest": "user"},
-#     ],
-#     initial="user",
-#     auto_transitions=False,
-#     show_conditions=True,
-# )
-
-
-# machine = TocMachine(
-#     states=["user", "state1", "state2"],
-#     transitions=[
-#         {
-#             "trigger": "advance",
-#             "source": "user",
-#             "dest": "state1",
-#             "conditions": "is_going_to_state1",
-#         },
-#         {
-#             "trigger": "advance",
-#             "source": "user",
-#             "dest": "state2",
-#             "conditions": "is_going_to_state2",
-#         },
-#         {"trigger": "go_back", "source": ["state1", "state2"], "dest": "user"},
-#     ],
-#     initial="user",
-#     auto_transitions=False,
-#     show_conditions=True,
-# )
 app = Flask(__name__, static_url_path="")
 
 
@@ -169,12 +103,9 @@ line_bot_api = LineBotApi(channel_access_token)
 handler = WebhookHandler(channel_secret)
 parser = WebhookParser(channel_secret)
 
-mode = 0
-
 
 @app.route('/callback', methods=['POST'])
 def webhook_handler():
-    global mode
     signature = request.headers['X-Line-Signature']
     # get request body as text
     body = request.get_data(as_text=True)
@@ -200,6 +131,12 @@ def webhook_handler():
         # response = machine.advance(event)
 
         # if response == False:
+        uid = event.source.user_id
+        print("uid", uid)
+        if uid in user_state:
+            machine.state = user_state[uid]
+        else:
+            user_state[uid] = 'user'
         msg = event.message.text.lower()
         if machine.state == 'user' and event.message.text.lower() == 'dine':
             machine.state = 'dine_input_time'
@@ -287,7 +224,7 @@ def webhook_handler():
             # send_text_message(event.reply_token, 'default')
             machine.default_msg(event)
             print(f'\nFSM STATE: {machine.state}')
-
+        user_state[uid] = machine.state
     return 'OK'
 
 
