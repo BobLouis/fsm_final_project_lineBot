@@ -401,7 +401,7 @@ def aerobic10(reply_token):
         template=CarouselTemplate(
             columns=[
                 CarouselColumn(
-                    thumbnail_image_url='https://i.imgur.com/8BlV8Kc.jpeg',
+                    thumbnail_image_url='https://i.imgur.com/YaoDBO3.png',
                     title='10分钟超燃脂HIIT有氧运动',
                     text='不伤膝盖）比跑步郑多燕更有效减肥瘦身还有线条【周六野Zoey】',
                     actions=[
@@ -412,7 +412,7 @@ def aerobic10(reply_token):
                     ]
                 ),
                 CarouselColumn(
-                    thumbnail_image_url='https://i.imgur.com/8BlV8Kc.jpeg',
+                    thumbnail_image_url='https://i.imgur.com/EKUq1Cq.png',
                     title='有氧運動 無跳躍不傷膝蓋10分鐘有氧運動',
                     text='在家跟著節奏爆汗吧！',
                     actions=[
@@ -436,7 +436,7 @@ def aerobic20(reply_token):
         template=CarouselTemplate(
             columns=[
                 CarouselColumn(
-                    thumbnail_image_url='https://i.imgur.com/8BlV8Kc.jpeg',
+                    thumbnail_image_url='https://i.imgur.com/Y6XH7C9.png',
                     title='20分鐘低難度有氧運動',
                     text='腰腿| 燃脂| 無工具高體脂大基數入門適合【周六野Zoey】',
                     actions=[
@@ -447,7 +447,7 @@ def aerobic20(reply_token):
                     ]
                 ),
                 CarouselColumn(
-                    thumbnail_image_url='https://i.imgur.com/8BlV8Kc.jpeg',
+                    thumbnail_image_url='https://i.imgur.com/qcFcReE.png',
                     title='20分钟暴汗燃脂有氧运动',
                     text='全程站立无跳跃｜膝盖友好｜大基数友好【周六野Zoey】',
                     actions=[
@@ -471,7 +471,7 @@ def retrain10(reply_token):
         template=CarouselTemplate(
             columns=[
                 CarouselColumn(
-                    thumbnail_image_url='https://i.imgur.com/8BlV8Kc.jpeg',
+                    thumbnail_image_url='https://i.imgur.com/YAbDeGn.png',
                     title='進階居家撕裂者腹肌10分鐘運動',
                     text='每天跟May做一輪，腹肌現形🔥At-home 10min intense abs workout. Do this everyday!',
                     actions=[
@@ -482,7 +482,7 @@ def retrain10(reply_token):
                     ]
                 ),
                 CarouselColumn(
-                    thumbnail_image_url='https://i.imgur.com/8BlV8Kc.jpeg',
+                    thumbnail_image_url='https://i.imgur.com/dJjCQhm.png',
                     title='中階】居家健身',
                     text='10分鐘腹肌訓練 - 無器械 打造六塊肌/ 10 mins abs workout at home no equipment',
                     actions=[
@@ -506,7 +506,7 @@ def retrain20(reply_token):
         template=CarouselTemplate(
             columns=[
                 CarouselColumn(
-                    thumbnail_image_url='https://i.imgur.com/8BlV8Kc.jpeg',
+                    thumbnail_image_url='https://i.imgur.com/QN4VVVg.png',
                     title='20分鐘居家高强度全身肌肉徒手訓練【高級版】',
                     text='無需器材也能在家做的運動｜有效針對全身肌肉的訓練｜男生和女生都適合的健身訓練【健身運動】',
                     actions=[
@@ -517,7 +517,7 @@ def retrain20(reply_token):
                     ]
                 ),
                 CarouselColumn(
-                    thumbnail_image_url='https://i.imgur.com/8BlV8Kc.jpeg',
+                    thumbnail_image_url='https://i.imgur.com/mvRrRES.png',
                     title='FF居家上工訓練菜單',
                     text='20分鐘高燃脂 HIIT 訓練(無跳躍)',
                     actions=[
@@ -541,7 +541,7 @@ def hi_aerobic10(reply_token):
         template=CarouselTemplate(
             columns=[
                 CarouselColumn(
-                    thumbnail_image_url='https://i.imgur.com/8BlV8Kc.jpeg',
+                    thumbnail_image_url='https://i.imgur.com/eC3g1pb.png',
                     title='中階 10分鐘高強度居家運動',
                     text='燃燒脂肪 有氧+無氧/',
                     actions=[
@@ -552,7 +552,7 @@ def hi_aerobic10(reply_token):
                     ]
                 ),
                 CarouselColumn(
-                    thumbnail_image_url='https://i.imgur.com/8BlV8Kc.jpeg',
+                    thumbnail_image_url='https://i.imgur.com/G69BivM.png',
                     title='10分钟全身超燃脂有氧运动',
                     text='突破平台期加速减脂HIIT，强度升级【周六野Zoey】',
                     actions=[
@@ -576,7 +576,7 @@ def hi_aerobic20(reply_token):
         template=CarouselTemplate(
             columns=[
                 CarouselColumn(
-                    thumbnail_image_url='https://i.imgur.com/8BlV8Kc.jpeg',
+                    thumbnail_image_url='https://i.imgur.com/OIR5FjW.png',
                     title='20分钟在家高强度全身燃脂运动🔥',
                     text=' 全程站立&无器械 | 20 Min Standing HIIT for Fat Burn',
                     actions=[
@@ -587,7 +587,7 @@ def hi_aerobic20(reply_token):
                     ]
                 ),
                 CarouselColumn(
-                    thumbnail_image_url='https://i.imgur.com/8BlV8Kc.jpeg',
+                    thumbnail_image_url='https://i.imgur.com/AGLH9KC.png',
                     title='【中階】居家瘦身',
                     text=' 20分鐘有氧運動 - 燃燒脂肪 無器械(中等強度)',
                     actions=[
