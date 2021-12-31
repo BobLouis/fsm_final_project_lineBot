@@ -26,6 +26,7 @@ machine = TocMachine(
             "dine_breakfast", "dine_lunch", "dine_dinner",
             "BMI_input_height", "BMI_input_weight", "BMI_final",
             "sport_input_type", "sport_input_time", "sport_final",
+            "water_input_weight", "water_input_bottle_storage", "water_final",
             "news", "news_social", "news_health"
             ],
     transitions=[

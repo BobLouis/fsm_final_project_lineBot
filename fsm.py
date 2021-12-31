@@ -53,20 +53,44 @@ class TocMachine(GraphMachine):
         self.weight = val
         send_text_message(event.reply_token, 'please input your height in cm')
 
+    # def BMI_input_weight(self, event, val):
+    #     self.height = val
+    #     title = '你的BMI 指數'
+    #     text = 'BMI = ' + \
+    #         str(round(self.weight / ((self.height/100) ** 2), 2))
+    #     btn = [
+    #         MessageTemplateAction(
+    #             label='BMI 建議',
+    #             url="https://www.hpa.gov.tw/Pages/Detail.aspx?nodeid=542&pid=9737"
+    #         )
+    #     ]
+    #     url = 'https://i.imgur.com/GlJn5SY.jpeg'
+    #     send_button_message(event.reply_token, title, text, btn, url)
+    #     self.go_back()
     def BMI_input_weight(self, event, val):
         self.height = val
-        title = '你的BMI 指數'
-        text = 'BMI = ' + \
-            str(round(self.weight / ((self.height/100) ** 2), 2))
-        btn = [
-            MessageTemplateAction(
-                label='BMI',
-                text='BMI'
+        line_bot_api = LineBotApi(channel_access_token)
+        Carousel_template = TemplateSendMessage(
+            alt_text='Carousel template',
+            template=CarouselTemplate(
+                columns=[
+                    CarouselColumn(
+                        thumbnail_image_url='https://i.imgur.com/GlJn5SY.jpeg',
+                        title='你的BMI 指數',
+                        text='BMI = ' +
+                        str(round(self.weight / ((self.height/100) ** 2), 2)),
+                        actions=[
+                            URITemplateAction(
+                                label='衛生部BMI建議',
+                                uri='https://www.hpa.gov.tw/Pages/Detail.aspx?nodeid=542&pid=9737'
+                            )
+                        ]
+                    )
+                ]
             )
-        ]
-        url = 'https://i.imgur.com/GlJn5SY.jpeg'
-        send_button_message(event.reply_token, title, text, btn, url)
-        self.go_back()
+        )
+        line_bot_api.reply_message(event.reply_token, Carousel_template)
+        return 'ok'
 
     def drink_water(self, event):
         send_text_message(event.reply_token,
@@ -171,7 +195,7 @@ class TocMachine(GraphMachine):
             ),
 
         ]
-        url = 'https://i.imgur.com/NT0a6ID.png'
+        url = 'https://i.imgur.com/oO503QL.jpeg'
         send_button_message(event.reply_token, title, text, btn, url)
 
     def select_news(self, event):
